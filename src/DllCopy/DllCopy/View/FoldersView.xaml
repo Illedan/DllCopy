@@ -1,0 +1,125 @@
+﻿<UserControl x:Class="DllCopy.View.FoldersView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:DllCopy.View"
+             xmlns:models="clr-namespace:DllCopy.Models"
+             xmlns:viewmodels="clr-namespace:DllCopy"
+             
+             mc:Ignorable="d" 
+             x:Name="outer"
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <Style x:Key="btn" TargetType="Button">
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="#13555555"/>
+            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Padding" Value="3"/>
+        </Style>
+        <DataTemplate DataType="{x:Type models:File}">
+            <StackPanel Orientation="Horizontal" x:Name="file"
+                                        VerticalAlignment="Center">
+                <StackPanel.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Open path" 
+                                  Command="{x:Static viewmodels:MainViewModel.OpenFileCommand}"
+                                  CommandParameter="{Binding}"></MenuItem>
+                    </ContextMenu>
+                </StackPanel.ContextMenu>
+                <Button Content="X" 
+                        Cursor="Hand"
+                                        Foreground="Red"
+                                        Style="{StaticResource btn}"
+                                        Command="{Binding ElementName=outer, Path=DataContext.DeleteFileCommand}"
+                                        CommandParameter="{Binding}"/>
+
+                <TextBlock Text="{Binding Title}" 
+                                           VerticalAlignment="Center"
+                                         Foreground="WhiteSmoke"
+                                         FontSize="12"/>
+            </StackPanel>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type models:Folder}" x:Key="folderHeader">
+            <StackPanel Orientation="Horizontal">
+                <Button Content="X" 
+                        Style="{StaticResource btn}"
+                        Foreground="Red"
+                        Cursor="Hand"
+                        Command="{Binding ElementName=outer, Path=DataContext.DeleteFolderCommand}"
+                        CommandParameter="{Binding}"/>
+
+                <Button Cursor="Hand"
+                        Command="{Binding ElementName=outer, Path=DataContext.AddFolderCommand}"
+                        CommandParameter="{Binding}"
+                        Style="{StaticResource btn}"
+                        ToolTip="Add folder">
+                    <Path Fill="Orange" 
+                          Width="15"
+                          Height="15"
+                          Stretch="Uniform"
+                          Data="F1 M 21,30.0001L 55.9999,30.0001L 55.9999,50L 21,50L 21,30.0001 Z M 52,28L 37,28C 38,25 39.4999,24.0001 39.4999,24.0001L 50.75,24C 51.3023,24 52,24.6977 52,25.25L 52,28 Z "/>
+                </Button>
+
+                <Button Command="{Binding ElementName=outer, Path=DataContext.AddFileCommand}"
+                        CommandParameter="{Binding}"
+                        Cursor="Hand"
+                        ToolTip="Add file"
+                        Width="20"
+                        Height="20"
+                        Style="{StaticResource btn}">
+                    <Path Fill="Orange" 
+                          Stretch="Uniform"
+                          Data="F1 M 20,17L 44.25,17L 56,28.75L 56,59L 20,59L 20,17 Z M 24,21L 24,55L 52,55L 52,33L 40,33L 40,21L 24,21 Z M 44,22.25L 44,29L 50.75,29L 44,22.25 Z M 26,23L 38,23L 38,28L 26,28L 26,23 Z M 26,30L 38,30L 38,33L 26,33L 26,30 Z M 26,35L 50,35L 50,38L 26,38L 26,35 Z M 26,40L 50,40L 50,43L 26,43L 26,40 Z M 26,45L 50,45L 50,48L 26,48L 26,45 Z M 26,50L 50,50L 50,53L 26,53L 26,50 Z"/>
+                </Button>
+                
+                <CheckBox IsChecked="{Binding IsSelected}" VerticalAlignment="Center"
+                          ToolTip="Copy this on starting"/>
+
+                <TextBox Text="{Binding Title}" 
+                         VerticalAlignment="Center"
+                            Foreground="WhiteSmoke"
+                            FontSize="13.337"
+                            Background="Transparent"
+                            BorderThickness="0,0,0,1"
+                            BorderBrush="#343434"/>
+            </StackPanel>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type models:Folder}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <ContentControl ContentTemplate="{StaticResource folderHeader}" Content="{Binding}"/>
+                <ItemsControl ItemsSource="{Binding Files}" Margin="5, 3,3,3" Grid.Row="1"/>
+                <ItemsControl ItemsSource="{Binding Folders}" Margin="5,3,3,3" Grid.Row="2"/>
+            </Grid>
+        </DataTemplate>
+    </UserControl.Resources>
+    <ScrollViewer HorizontalScrollBarVisibility="Disabled" Background="Transparent" VerticalScrollBarVisibility="Auto">
+        <ItemsControl ItemsSource="{Binding Folders}" >
+            <ItemsControl.ItemTemplate>
+                <DataTemplate >
+                    <Expander IsExpanded="{Binding IsExpanded}" >
+                        <Expander.Header>
+                            <ContentControl Cursor="Hand" ContentTemplate="{StaticResource folderHeader}" Content="{Binding}"/>
+                        </Expander.Header>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <ItemsControl ItemsSource="{Binding Files}" Margin="5,3,3,3" Grid.Row="0"/>
+                            <ItemsControl ItemsSource="{Binding Folders}" Margin="5,3,3,3" Grid.Row="1"/>
+                        </Grid>
+                    </Expander>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+</UserControl>

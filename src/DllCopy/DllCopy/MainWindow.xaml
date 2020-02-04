@@ -1,0 +1,83 @@
+﻿<Window x:Class="DllCopy.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DllCopy"
+        xmlns:view="clr-namespace:DllCopy.View"
+        
+        mc:Ignorable="d"
+        Background="#2a2a2a"
+        Title="DllCopy" Height="450" Width="800">
+    <Window.Resources>
+        <Style TargetType="TextBlock" x:Key="headers">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="FontSize" Value="16.667"/>
+            <Setter Property="Margin" Value="5"/>
+        </Style>
+        
+        <Style TargetType="Button" x:Key="addBtn">
+            <Setter Property="Foreground" Value="WhiteSmoke"/>
+            <Setter Property="FontSize" Value="16.667"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="BorderBrush" Value="DarkOrange"/>
+            <Setter Property="Background" Value="Transparent"/>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        
+        <TextBlock Text="FILES"
+                   Style="{StaticResource headers}"/>
+        <TextBlock Text="TARGETS" 
+                   Style="{StaticResource headers}"
+                   Grid.Column="1"
+                   Grid.Row="0"/>
+        
+        <view:FoldersView Grid.Row="1"
+                          Grid.Column="0"/>
+        
+        <view:TargetsView Grid.Row="1"
+                          Grid.Column="1"/>
+
+        <view:SelectedTargetView Grid.Row="0"
+                                 Grid.RowSpan="3"
+                                 Grid.Column="2"/>
+        
+        <Button Style="{StaticResource addBtn}" 
+                Content="NEW FOLDER"
+                Grid.Row="2"
+                Command="{Binding AddOuterFolderCommand}"
+                Grid.Column="0"/>
+        
+        <Button Style="{StaticResource addBtn}" 
+                Content="NEW TARGET"
+                Grid.Row="2"
+                Command="{Binding AddTargetCommand}"
+                Grid.Column="1"/>
+
+        <TextBox CaretBrush="white"
+                 Padding="10"
+                 FontSize="15"
+                 Grid.ColumnSpan="3"
+                 Grid.Row="3"
+                 Text="{Binding Message}"
+                 Foreground="WhiteSmoke"
+                 Background="Black"
+                 BorderThickness="1"
+                 Margin="3"
+                 TextWrapping="WrapWithOverflow" 
+                 AcceptsReturn="True" 
+                 AcceptsTab="True"/>
+    </Grid>
+</Window>
