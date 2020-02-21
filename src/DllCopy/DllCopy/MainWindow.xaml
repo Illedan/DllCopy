@@ -6,10 +6,13 @@
         xmlns:local="clr-namespace:DllCopy"
         xmlns:view="clr-namespace:DllCopy.View"
         Template="{StaticResource ToolBarTemplate}"
-        WindowStyle="None"
         mc:Ignorable="d"
-        Background="#2a2a2a"
-        Title="DllCopy" Height="450" Width="800">
+        Title="DllCopy"
+        WindowStyle="None"
+        ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
+        Height="450"
+        Width="800">
     <Window.Resources>
         <Style TargetType="TextBlock" x:Key="headers">
             <Setter Property="Foreground" Value="WhiteSmoke"/>
@@ -21,11 +24,12 @@
             <Setter Property="Foreground" Value="WhiteSmoke"/>
             <Setter Property="FontSize" Value="16.667"/>
             <Setter Property="Margin" Value="5"/>
-            <Setter Property="BorderBrush" Value="DarkOrange"/>
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource DllCopyOrange}"/>
             <Setter Property="Background" Value="Transparent"/>
         </Style>
     </Window.Resources>
-    <Grid>
+    <Grid Background="#2a2a2a">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition/>

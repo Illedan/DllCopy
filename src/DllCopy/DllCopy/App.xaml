@@ -16,13 +16,20 @@
             <Style TargetType="ScrollBar">
                 <Setter Property="Background" Value="Black"/>
             </Style>
+
+            <Brush x:Key="DllCopyDarkGray">#2a2a2a</Brush>
+            <Brush x:Key="DllCopyOrange">DarkOrange</Brush>
+
             <ControlTemplate x:Key="ToolBarTemplate" TargetType="Window">
-                <Grid>
+                <Grid Background="{StaticResource DllCopyDarkGray}">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <View:ToolBarControl Grid.Row="0" />
+                    <View:ToolBarControl Grid.Row="0"
+                                         ButtonColor="{StaticResource DllCopyOrange}"
+                                         Background="{StaticResource DllCopyOrange}"
+                                         ButtonMouseOverColor="{StaticResource DllCopyDarkGray}"/>
                     <ContentPresenter Grid.Row="1"/>
                 </Grid>
             </ControlTemplate>
