@@ -24,5 +24,39 @@ namespace DllCopy.View
         {
             InitializeComponent();
         }
+
+        void PnMouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            if (e.LeftButton == MouseButtonState.Pressed)
+            {
+                if (App.Current.MainWindow.WindowState == WindowState.Maximized)
+                {
+                    App.Current.MainWindow.WindowState = WindowState.Normal;
+                }
+                App.Current.MainWindow.DragMove();
+            }
+        }
+
+        private void ToolBarControl_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (e.ClickCount == 2)
+            {
+                switch (App.Current.MainWindow.WindowState)
+                {
+                    case WindowState.Normal:
+                        App.Current.MainWindow.WindowState = WindowState.Maximized;
+                        break;
+                    case WindowState.Minimized:
+                        App.Current.MainWindow.WindowState = WindowState.Maximized;
+                        break;
+                    case WindowState.Maximized:
+                        App.Current.MainWindow.WindowState = WindowState.Normal;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException();
+                }
+                
+            }
+        }
     }
 }
