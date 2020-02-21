@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DllCopy"
         xmlns:view="clr-namespace:DllCopy.View"
-        
+        Template="{StaticResource ToolBarTemplate}"
+        WindowStyle="None"
         mc:Ignorable="d"
         Background="#2a2a2a"
         Title="DllCopy" Height="450" Width="800">
