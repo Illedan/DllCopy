@@ -90,7 +90,8 @@
                         Width="40"
                         Style="{StaticResource TransparentStyle}"
                         BorderBrush="Transparent"
-                        Click="CloseApp">
+                        Click="CloseApp"
+                        IsEnabled="{Binding ElementName=behindCode, Path=CanShutdown}">
                     <Path Width="15"
                           Height="15"
                           Stretch="Fill"

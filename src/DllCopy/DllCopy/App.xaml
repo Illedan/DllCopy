@@ -29,7 +29,8 @@
                     <View:ToolBarControl Grid.Row="0"
                                          ButtonColor="{StaticResource DllCopyOrange}"
                                          Background="{StaticResource DllCopyOrange}"
-                                         ButtonMouseOverColor="{StaticResource DllCopyDarkGray}"/>
+                                         ButtonMouseOverColor="{StaticResource DllCopyDarkGray}"
+                                         />
                     <ContentPresenter Grid.Row="1"/>
                 </Grid>
             </ControlTemplate>

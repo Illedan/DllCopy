@@ -51,6 +51,14 @@ namespace DllCopy.View
 
         public static readonly DependencyProperty ButtonMouseOverColorProperty = DependencyProperty.Register("ButtonMouseOverColor", typeof(Brush), typeof(ToolBarControl), new PropertyMetadata(default(Brush)));
 
+        public static readonly DependencyProperty CanShutdownProperty = DependencyProperty.Register("CanShutdown", typeof(bool), typeof(ToolBarControl), new PropertyMetadata(true));
+
+        public bool CanShutdown
+        {
+            get { return (bool)GetValue(CanShutdownProperty); }
+            set { SetValue(CanShutdownProperty, value); }
+        }
+
         public Brush ButtonMouseOverColor
         {
             get { return (Brush)GetValue(ButtonMouseOverColorProperty); }
