@@ -91,6 +91,9 @@
     <Compile Include="View\TargetsView.xaml.cs">
       <DependentUpon>TargetsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ToolBarControl.xaml.cs">
+      <DependentUpon>ToolBarControl.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\TargetsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ToolBarControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
